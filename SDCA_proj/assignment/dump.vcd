@@ -1,0 +1,37 @@
+$date
+	Tue Nov 14 19:30:08 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_jk $end
+$var wire 1 ! q $end
+$var reg 1 " clk $end
+$var reg 1 # j $end
+$var reg 1 $ k $end
+$scope module jk0 $end
+$var wire 1 " clk $end
+$var wire 1 # j $end
+$var wire 1 $ k $end
+$var reg 1 ! q $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0$
+0#
+x"
+x!
+$end
+#5
+1$
+#25
+0$
+1#
+#45
+1$
+#65

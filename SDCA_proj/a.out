@@ -1,0 +1,84 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x563dbb2a6920 .scope module, "testbench" "testbench" 2 3;
+ .timescale -9 -12;
+v0x563dbb2cbb30_0 .var "clk", 0 0;
+v0x563dbb2cbbd0_0 .net "led", 0 0, L_0x563dbb2dc170;  1 drivers
+S_0x563dbb2b8a00 .scope module, "pwm_inst" "pwm" 2 8, 3 3 0, S_0x563dbb2a6920;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /OUTPUT 1 "led";
+v0x563dbb2b8be0_0 .net *"_ivl_0", 31 0, L_0x563dbb2cbca0;  1 drivers
+L_0x7f9b57b170f0 .functor BUFT 1, C4<01>, C4<0>, C4<0>, C4<0>;
+v0x563dbb2cb320_0 .net/2s *"_ivl_10", 1 0, L_0x7f9b57b170f0;  1 drivers
+v0x563dbb2cb400_0 .net *"_ivl_12", 1 0, L_0x563dbb2dbfb0;  1 drivers
+L_0x7f9b57b17018 .functor BUFT 1, C4<000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0x563dbb2cb4c0_0 .net *"_ivl_3", 23 0, L_0x7f9b57b17018;  1 drivers
+L_0x7f9b57b17060 .functor BUFT 1, C4<00000000000000000000000001111111>, C4<0>, C4<0>, C4<0>;
+v0x563dbb2cb5a0_0 .net/2u *"_ivl_4", 31 0, L_0x7f9b57b17060;  1 drivers
+v0x563dbb2cb6d0_0 .net *"_ivl_6", 0 0, L_0x563dbb2dbe10;  1 drivers
+L_0x7f9b57b170a8 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0x563dbb2cb790_0 .net/2s *"_ivl_8", 1 0, L_0x7f9b57b170a8;  1 drivers
+v0x563dbb2cb870_0 .net "clk", 0 0, v0x563dbb2cbb30_0;  1 drivers
+v0x563dbb2cb930_0 .var "counter", 7 0;
+v0x563dbb2cba10_0 .net "led", 0 0, L_0x563dbb2dc170;  alias, 1 drivers
+E_0x563dbb27f3c0 .event posedge, v0x563dbb2cb870_0;
+L_0x563dbb2cbca0 .concat [ 8 24 0 0], v0x563dbb2cb930_0, L_0x7f9b57b17018;
+L_0x563dbb2dbe10 .cmp/gt 32, L_0x7f9b57b17060, L_0x563dbb2cbca0;
+L_0x563dbb2dbfb0 .functor MUXZ 2, L_0x7f9b57b170f0, L_0x7f9b57b170a8, L_0x563dbb2dbe10, C4<>;
+L_0x563dbb2dc170 .part L_0x563dbb2dbfb0, 0, 1;
+    .scope S_0x563dbb2b8a00;
+T_0 ;
+    %pushi/vec4 0, 0, 8;
+    %store/vec4 v0x563dbb2cb930_0, 0, 8;
+    %end;
+    .thread T_0;
+    .scope S_0x563dbb2b8a00;
+T_1 ;
+    %wait E_0x563dbb27f3c0;
+    %load/vec4 v0x563dbb2cb930_0;
+    %pad/u 32;
+    %cmpi/u 255, 0, 32;
+    %jmp/0xz  T_1.0, 5;
+    %load/vec4 v0x563dbb2cb930_0;
+    %addi 1, 0, 8;
+    %assign/vec4 v0x563dbb2cb930_0, 0;
+    %jmp T_1.1;
+T_1.0 ;
+    %pushi/vec4 0, 0, 8;
+    %assign/vec4 v0x563dbb2cb930_0, 0;
+T_1.1 ;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x563dbb2a6920;
+T_2 ;
+    %delay 1000, 0;
+    %load/vec4 v0x563dbb2cbb30_0;
+    %inv;
+    %store/vec4 v0x563dbb2cbb30_0, 0, 1;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x563dbb2a6920;
+T_3 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x563dbb2cbb30_0, 0, 1;
+    %vpi_call 2 22 "$dumpfile", "waveform.vcd" {0 0 0};
+    %vpi_call 2 23 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x563dbb2a6920 {0 0 0};
+    %vpi_call 2 24 "$display", "Simulation started" {0 0 0};
+    %delay 10000000, 0;
+    %vpi_call 2 25 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "pwm_tb.v";
+    "pwm.v";
